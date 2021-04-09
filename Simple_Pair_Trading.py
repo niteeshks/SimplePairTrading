@@ -12,7 +12,7 @@ final_signal='final_signal.csv'
 
 x=pd.read_csv(path+stocklist)
 stocks=x['Symbol'].to_list()
-stocks=stocks[1:101]                                    # Change index to match with no of securities in the stock list file
+stocks=stocks[1:100]                                    # Change index to match with no of securities in the stock list file
 
 if input("Do you want to download latest data:").upper() == 'Y':     
     data=[]
@@ -40,7 +40,7 @@ i=0
 while i<len(stocks):
     for column in returndata.columns[i:len(stocks)]:
         x=returndata['return_'+stocks[i]].corr(returndata[column])
-        if x > 0.75 and x!=1.0:                                           #Change Correlation parameter here!
+        if x > 0.75 and x!=1.0:                                           #Change Correlation parameter here! Here the logic is to compute further for only those pair which have correlation of over .75
             corrlist.append(stocks[i])
             corrlist.append(column[7:])
             ratiolist.append(stocks[i]+' / '+column[7:])
